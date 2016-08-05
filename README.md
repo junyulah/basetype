@@ -1,0 +1,2 @@
+# basetype
+basic javascript type
