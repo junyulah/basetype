@@ -4,7 +4,7 @@
  * basic types
  */
 
-let isArray = v => v && typeof v === 'object' && typeof v.length === 'number';
+let likeArray = v => v && typeof v === 'object' && typeof v.length === 'number' && v.length >= 0;
 
 let isString = v => typeof v === 'string';
 
@@ -12,7 +12,7 @@ let isObject = v => v && typeof v === 'object';
 
 let isFunction = v => typeof v === 'function';
 
-let isNumber = v => typeof v === 'number';
+let isNumber = v => typeof v === 'number' && !isNaN(v);
 
 let isBool = v => typeof v === 'boolean';
 
@@ -26,7 +26,7 @@ let isNode = (o) => {
 let isPromise = v => v && typeof v === 'object' && typeof v.then === 'function' && typeof v.catch === 'function';
 
 module.exports = {
-    isArray,
+    likeArray,
     isString,
     isObject,
     isFunction,
