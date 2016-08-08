@@ -4,6 +4,12 @@
  * basic types
  */
 
+let isUndefined = v => v === undefined;
+
+let isNull = v => v === null;
+
+let isFalsy = v => !v;
+
 let likeArray = v => v && typeof v === 'object' && typeof v.length === 'number' && v.length >= 0;
 
 let isString = v => typeof v === 'string';
@@ -32,18 +38,18 @@ let isPromise = v => v && typeof v === 'object' && typeof v.then === 'function' 
  */
 let funType = (fun, types = []) => {
     if (!isFunction(fun)) {
-        throw new TypeError(`Expect function type arg[fun] in checkFunType, but got type ${typeof fun}, and value is ${fun}`);
+        throw new TypeError(typeErrorText(fun, 'function'));
     }
 
     if (!likeArray(types)) {
-        throw new TypeError(`Expect Array type arg[types] in checkFunType, but got type ${typeof types}, and value is ${types}`);
+        throw new TypeError(typeErrorText(types, 'array'));
     }
 
     for (let i = 0; i < types.length; i++) {
         let typeFun = types[i];
         if (typeFun) {
             if (!isFunction(typeFun)) {
-                throw new TypeError(`Expect function for typeFun in types ${i}. But got type ${typeof typeFun}, ${typeFun}.`);
+                throw new TypeError(typeErrorText(typeFun, 'function'));
             }
         }
     }
@@ -95,10 +101,10 @@ let or = (...args) => {
 
 let any = (list, type) => {
     if (!likeArray(list)) {
-        throw new TypeError(`Expect Array type, but got type ${typeof list}, and value is ${list}`);
+        throw new TypeError(typeErrorText(list, 'list'));
     }
     if (!isFunction(type)) {
-        throw new TypeError(`Expect function type, but got type ${typeof type}, and value is ${type}`);
+        throw new TypeError(typeErrorText(type, 'function'));
     }
 
     for (let i = 0; i < list.length; i++) {
@@ -111,10 +117,10 @@ let any = (list, type) => {
 
 let exist = (list, type) => {
     if (!likeArray(list)) {
-        throw new TypeError(`Expect Array type, but got type ${typeof list}, and value is ${list}`);
+        throw new TypeError(typeErrorText(list, 'array'));
     }
     if (!isFunction(type)) {
-        throw new TypeError(`Expect function type, but got type ${typeof type}, and value is ${type}`);
+        throw new TypeError(typeErrorText(type, 'function'));
     }
 
     for (let i = 0; i < list.length; i++) {
@@ -123,6 +129,39 @@ let exist = (list, type) => {
         }
     }
     return false;
+};
+
+let mapType = (map) => {
+    if (!isObject(map)) {
+        throw new TypeError(typeErrorText(map, 'obj'));
+    }
+
+    for (let name in map) {
+        let type = map[name];
+        if (!isFunction(type)) {
+            throw new TypeError(typeErrorText(type, 'function'));
+        }
+    }
+
+    return (v) => {
+        if (!isObject(v)) {
+            return false;
+        }
+
+        for (let name in map) {
+            let type = map[name];
+            let attr = v[name];
+            if (!type(attr)) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+};
+
+let typeErrorText = (v, expect) => {
+    return `Expect ${expect} type, but got type ${typeof v}, and value is ${v}`;
 };
 
 module.exports = {
@@ -134,12 +173,15 @@ module.exports = {
     isBool,
     isNode,
     isPromise,
+    isNull,
+    isUndefined,
+    isFalsy,
 
     funType,
-
     any,
     exist,
 
     and,
-    or
+    or,
+    mapType
 };
