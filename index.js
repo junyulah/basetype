@@ -12,6 +12,8 @@ let isFalsy = v => !v;
 
 let likeArray = v => v && typeof v === 'object' && typeof v.length === 'number' && v.length >= 0;
 
+let isArray = v => Array.isArray(v);
+
 let isString = v => typeof v === 'string';
 
 let isObject = v => v && typeof v === 'object';
@@ -160,11 +162,20 @@ let mapType = (map) => {
     };
 };
 
+let listType = (type) => {
+    if (!isFunction(type)) {
+        throw new TypeError(typeErrorText(type, 'function'));
+    }
+
+    return (list) => any(list, type);
+};
+
 let typeErrorText = (v, expect) => {
     return `Expect ${expect} type, but got type ${typeof v}, and value is ${v}`;
 };
 
 module.exports = {
+    isArray,
     likeArray,
     isString,
     isObject,
@@ -183,5 +194,6 @@ module.exports = {
 
     and,
     or,
-    mapType
+    mapType,
+    listType
 };
