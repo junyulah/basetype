@@ -4,7 +4,8 @@
   "description": "basic javascript type",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/**/*.js"
+    "test": "mocha test/**/*.js",
+    "cover": "istanbul cover _mocha"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/LoveKino/basetype#readme",
   "devDependencies": {
+    "istanbul": "^0.4.4",
     "mocha": "^3.0.1"
   }
 }

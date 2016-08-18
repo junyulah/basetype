@@ -10,13 +10,13 @@ let isNull = v => v === null;
 
 let isFalsy = v => !v;
 
-let likeArray = v => v && typeof v === 'object' && typeof v.length === 'number' && v.length >= 0;
+let likeArray = v => !!(v && typeof v === 'object' && typeof v.length === 'number' && v.length >= 0);
 
 let isArray = v => Array.isArray(v);
 
 let isString = v => typeof v === 'string';
 
-let isObject = v => v && typeof v === 'object';
+let isObject = v => !!(v && typeof v === 'object');
 
 let isFunction = v => typeof v === 'function';
 
@@ -99,6 +99,13 @@ let or = (...args) => {
         }
         return false;
     };
+};
+
+let not = (type) => {
+    if (!isFunction(type)) {
+        throw new TypeError('The argument of and must be function.');
+    }
+    return (v) => !type(v);
 };
 
 let any = (list, type) => {
@@ -194,6 +201,7 @@ module.exports = {
 
     and,
     or,
+    not,
     mapType,
     listType
 };
