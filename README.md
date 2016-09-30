@@ -2,6 +2,9 @@
 
 Provide basic type validation functions and simple type composition.
 
+[![Build Status](https://travis-ci.org/LoveKino/basetype.svg)](https://travis-ci.org/LoveKino/basetype.svg)
+[![Coverage Status](https://coveralls.io/repos/github/LoveKino/basetype/badge.svg?branch=master)](https://coveralls.io/github/LoveKino/basetype?branch=master)
+
 ## install
 
 `npm i basetype --save`
