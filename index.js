@@ -33,6 +33,8 @@ let isNode = (o) => {
 
 let isPromise = v => v && typeof v === 'object' && typeof v.then === 'function' && typeof v.catch === 'function';
 
+let isRegExp = v => v instanceof RegExp;
+
 /**
  * check type
  *
@@ -194,6 +196,7 @@ module.exports = {
     isNull,
     isUndefined,
     isFalsy,
+    isRegExp,
 
     funType,
     any,

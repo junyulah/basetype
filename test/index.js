@@ -5,6 +5,8 @@ let assert = require('assert');
 let {
     isNumber, isString, likeArray, isPromise, isBool,
     isUndefined, isNull, isFalsy, isArray, isObject,
+    isRegExp,
+
     isFunction, funType, and, or, not, any, exist,
     mapType, listType
 } = require('../index');
@@ -176,6 +178,12 @@ describe('index', () => {
         ]), false);
 
         done();
+    });
+
+    it('isRegExp', () => {
+        assert.equal(isRegExp(/dss/), true);
+        assert.equal(isRegExp(new RegExp('jkhh')), true);
+        assert.equal(isRegExp('dsdksjk'), false);
     });
 });
 
