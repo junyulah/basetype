@@ -24,7 +24,7 @@ likeArray([1, 2, 3]); // => true
 ## basic types
 
 ```js
-isUndefined, isNull, isFalsy, likeArray, isString, isObject, isFunction, isNumber, isBool, isNode, isPromise
+isUndefined, isNull, isFalsy, likeArray, isString, isObject, isFunction, isNumber, isBool, isNode, isPromise, isReadableStream, isWritableStream
 ```
 
 ## compose types
