@@ -35,6 +35,10 @@ let isPromise = v => v && typeof v === 'object' && typeof v.then === 'function' 
 
 let isRegExp = v => v instanceof RegExp;
 
+let isReadableStream = (v) => isObject(v) && isFunction(v.on) && isFunction(v.pipe);
+
+let isWritableStream = v => isObject(v) && isFunction(v.on) && isFunction(v.write);
+
 /**
  * check type
  *
@@ -197,6 +201,8 @@ module.exports = {
     isUndefined,
     isFalsy,
     isRegExp,
+    isReadableStream,
+    isWritableStream,
 
     funType,
     any,

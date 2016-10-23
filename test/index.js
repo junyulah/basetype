@@ -5,11 +5,13 @@ let assert = require('assert');
 let {
     isNumber, isString, likeArray, isPromise, isBool,
     isUndefined, isNull, isFalsy, isArray, isObject,
-    isRegExp,
+    isRegExp, isReadableStream, isWritableStream,
 
     isFunction, funType, and, or, not, any, exist,
     mapType, listType
 } = require('../index');
+
+let fs = require('fs');
 
 describe('index', () => {
     it('base', () => {
@@ -184,6 +186,16 @@ describe('index', () => {
         assert.equal(isRegExp(/dss/), true);
         assert.equal(isRegExp(new RegExp('jkhh')), true);
         assert.equal(isRegExp('dsdksjk'), false);
+    });
+
+    it('isReadableStream', () => {
+        assert.equal(isReadableStream(fs.createReadStream(__dirname + '/fixture/test.txt')), true);
+        assert.equal(isReadableStream('test'), false);
+    });
+
+    it('isWritableStream', () => {
+        assert.equal(isWritableStream(fs.createWriteStream(__dirname + '/fixture/test.txt')), true);
+        assert.equal(isWritableStream('test'), false);
     });
 });
 
