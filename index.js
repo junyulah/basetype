@@ -68,7 +68,7 @@ let funType = (fun, types = []) => {
             let typeFun = types[i];
             let arg = arguments[i];
             if (typeFun && !typeFun(arg)) {
-                throw new TypeError(`Argument type error. Arguments order ${i}. Argument is ${arg}.`);
+                throw new TypeError(`Argument type error. Arguments order ${i}. Argument is ${arg}. function is ${fun}.`);
             }
         }
         // result
