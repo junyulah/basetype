@@ -4,6 +4,8 @@
  * basic types
  */
 
+let truth = () => true;
+
 let isUndefined = v => v === undefined;
 
 let isNull = v => v === null;
@@ -212,5 +214,6 @@ module.exports = {
     or,
     not,
     mapType,
-    listType
+    listType,
+    truth
 };
